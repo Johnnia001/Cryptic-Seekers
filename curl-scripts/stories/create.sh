@@ -10,8 +10,8 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
     "story": {
+      "title": "'"${TITLE}"'",
       "owner": "'"${OWNER}"'",
-      "location": "'"${LOCATION}"'",
       "encounter": "'"${ENCOUNTER}"'",
       
     }

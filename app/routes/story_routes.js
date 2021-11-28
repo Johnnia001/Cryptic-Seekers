@@ -23,16 +23,31 @@ const router = express.Router()
 // requireToken makes sure only a signed in user can create an story
 router.post('/stories', requireToken, (req, res, next) => {
   // extract the story data from our client's request
-  const storyData = req.body.story
+  const storyData = req.body
 
   // Whenever an story is created, set the owner of the story (storyData.owner)
   // to be the currently signed in user (req.user._id)
-  storyData.owner = req.user._id
-
+  storyData.owner = req.user.id
   // Create an story using the storyData
   Story.create(storyData)
   // respond with a 201 created and the story
     .then((story) => res.status(201).json({ story }))
+    .catch(next)
+})
+
+// INDEX
+// GET /stories
+router.get('/stories', requireToken, (req, res, next) => {
+  Story.find()
+    .then(stories => {
+      // `stories` will be an array of Mongoose documents
+      // we want to convert each one to a POJO, so we use `.map` to
+      // apply `.toObject` to each one
+      return stories.map(movie => movie.toObject())
+    })
+    // respond with status 200 and JSON of the stories
+    .then(stories => res.status(200).json({ stories: stories }))
+    // if an error occurs, pass it to the handler
     .catch(next)
 })
 

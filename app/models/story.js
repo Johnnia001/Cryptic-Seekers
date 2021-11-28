@@ -16,12 +16,10 @@ const storySchema = new mongoose.Schema(
       required: true
     },
     location: {
-      type: String,
-      required: true
+      type: String
     },
-    encounter: {
-      type: String,
-      required: true
+    message: {
+      type: String
     },
 
     // Created a one-to-many relationship where one restaurant can have many reviews
