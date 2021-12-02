@@ -22,7 +22,7 @@ const storySchema = new mongoose.Schema(
       type: String
     },
 
-    // Created a one-to-many relationship where one restaurant can have many reviews
+    // Created a one-to-many relationship
     // using a sub document array
     comment: [commentSchema]
   },
