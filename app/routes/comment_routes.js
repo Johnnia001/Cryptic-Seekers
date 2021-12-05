@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('passport')
 
 const router = express.Router()
 
@@ -6,23 +7,27 @@ const router = express.Router()
 // So import the Story model
 const Story = require('../models/story')
 
+// const Comment = require('../models/comment')
+
 const handle404 = require('../../lib/custom_errors')
 
-// This route is used to create a comment for a story
-router.post('/comments', (req, res, next) => {
-  // extract our comment's data from the request's body
-  const commentData = req.body.comment
-  // extract the storyId for the story we want to comment
-  const storyId = commentData.storyId
+const requireToken = passport.authenticate('bearer', { session: false })
 
+// This route is used to create a comment for a story
+router.post('/comments', requireToken, (req, res, next) => {
+  // extract our comment's data from the request's body
+  const commentData = req.body.commentData
+  console.log(commentData)
+  // extract the storyId for the story we want to comment
+  const storyId = req.body.storyId
   // These next 3 lines, are the same as showing a story
+  console.log(storyId)
   Story.findById(storyId)
     .then(handle404)
     .then((story) => {
       // add a new comment for the story to the comments subdocument array
-      story.comments.push(commentData)
-
-      // to save a subdocument, you must save its parent document (the story)
+      console.log(story)
+      story.comment.push({content: commentData})
       return story.save()
     })
   // respond with the status code 201 Created and the story with a new comment on it
