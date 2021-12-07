@@ -3,8 +3,8 @@ Cryptic Seekers is a blog for people to post their experience and run-ins to sup
 
 ## Links ##
 [Other Repo](https://github.com/Johnnia001/Cryptic-Seekers-Client)
-[Deployed Api] (<insert link>)
-[Deployed Client] (<insert link>)
+[Deployed Api](https://pacific-mountain-17111.herokuapp.com)
+[Deployed Client](https://johnnia001.github.io/Cryptic-Seekers-Client/)
 
 ## ERD ##
 ![diagram](https://i.imgur.com/I3xhouv.png)
